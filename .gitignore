@@ -11,6 +11,7 @@ remote-repo/
 coverage/
 .module-cache
 *.gem
+dist/
 docs/.bundle
 docs/code
 docs/_site
