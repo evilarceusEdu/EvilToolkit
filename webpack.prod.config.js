@@ -29,6 +29,9 @@ module.exports = {
                 warnings: false
             }
         }),
-        new HtmlWebpackPlugin()
+        new HtmlWebpackPlugin({
+            title: "EvilToolkit - Webpack",
+            filename: "app/index.html"
+        })
     ]
 };
