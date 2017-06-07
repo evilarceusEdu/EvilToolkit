@@ -31,7 +31,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             title: "EvilToolkit - Webpack",
-            filename: "app/index.html"
+            filename: "index.html"
         })
     ]
 };
