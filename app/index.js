@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Router, Route, HashRouter} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 /* Import components */
 import TitleBar from './components/TitleBar';
-import YTDL_CardTemplate from "./components/CardTemplate";
+import CardTemplate from "./components/CardTemplate";
 /*-------------------*/
 
 // Needed for onTouchTap
@@ -12,15 +13,21 @@ import YTDL_CardTemplate from "./components/CardTemplate";
 injectTapEventPlugin();
 
 const App = () => (
-    <MuiThemeProvider>
-        <div>
-            <TitleBar />
-            <YTDL_CardTemplate/>
-        </div>
-    </MuiThemeProvider>
+        <MuiThemeProvider>
+            <div>
+                <TitleBar />
+                <CardTemplate/>
+            </div>
+        </MuiThemeProvider>
 );
 
-ReactDOM.render(
-<App />,
-    document.getElementById('root')
+const YtDl = () => (
+    console.log("unimplemented")
 );
+
+ReactDOM.render((
+<HashRouter>
+    <Route path="/" component={App}/>
+    <Route path="/ytdl" component={YtDl}/>
+</HashRouter>
+), document.getElementById('root'));

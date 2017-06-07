@@ -11,7 +11,8 @@ const YTDL_CardTemplate = () => (
             showExpandableButton={true}
         />
         <CardActions>
-            <FlatButton label="YouTube DL" />
+            <FlatButton
+                label="YouTube DL"/>
         </CardActions>
     </Card>
 );
