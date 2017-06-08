@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -16,19 +17,29 @@ module.exports = {
         publicPath: 'http://localhost:8080/'
     },
     module: {
-        loaders: [{
-            test: /\.js?$/,
-            loader: 'babel-loader',
-            exclude: /node_modules/,
-            query: {
-                presets: ['es2015', 'react']
-            }
-        }]
+        loaders:
+            [
+                {
+                    test: /\.js?$/,
+                    loader: 'babel-loader',
+                    exclude: /node_modules/,
+                    query: {
+                        presets: ['es2015', 'react']
+                    }
+                },
+                {
+                    test: /\.less$/,
+                    loader: 'style-loader!css-loader!less-loader',
+                    exclude: /node_modules/,
+                    include: path.resolve(__dirname, 'app')
+                }
+            ]
     },
     plugins: [
         new HtmlWebpackPlugin({
             title: "EvilToolkit - Webpack",
             filename: "app/index.html"
-        })
+        }),
+        new ExtractTextPlugin('style.css')
     ]
 }
