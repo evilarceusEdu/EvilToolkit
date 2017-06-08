@@ -30,13 +30,17 @@ const App = () => (
 );
 
 const YtDl = () => (
-    console.log("unimplemented")
+    <MuiThemeProvider muiTheme={getMuiTheme(MainTheme.default)}>
+        <div>
+            <TitleBar title="YouTubeDL" />
+        </div>
+    </MuiThemeProvider>
 );
 
 ReactDOM.render((
     <HashRouter>
         <div>
-            <Route path="/" component={App}/>
+            <Route exact path="/" component={App}/>
             <Route path="/ytdl" component={YtDl}/>
         </div>
     </HashRouter>
