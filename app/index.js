@@ -18,7 +18,7 @@ injectTapEventPlugin();
 
 const contentStyle = {
     /* WORST HACKER EVER - DONUT STEEL ( ͡° ͜ʖ ͡°) */
-    marginLeft: '18.5%'
+    marginLeft: '256px'
 };
 
 const App = () => (
