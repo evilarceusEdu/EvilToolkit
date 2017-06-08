@@ -2,19 +2,26 @@ import React from 'react';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
-const YTDL_CardTemplate = () => (
-    <Card>
-        <CardHeader
-            title="YouTube DL"
-            subtitle="Download videos from YouTube as several formats."
-            actAsExpander={true}
-            showExpandableButton={true}
-        />
-        <CardActions>
-            <FlatButton
-                label="YouTube DL"/>
-        </CardActions>
-    </Card>
-);
+export default class CardTemplate extends React.Component {
 
-export default YTDL_CardTemplate;
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <Card>
+                <CardHeader
+                    title={this.props.title}
+                    subtitle={this.props.description}
+                />
+                <CardActions>
+                    <FlatButton
+                        label={this.props.button}
+                        href={this.props.href}
+                    />
+                </CardActions>
+            </Card>
+        )
+    }
+}

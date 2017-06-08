@@ -16,12 +16,17 @@ import CardTemplate from "./components/CardTemplate";
 injectTapEventPlugin();
 
 const App = () => (
-        <MuiThemeProvider muiTheme={getMuiTheme(MainTheme)}>
-            <div>
-                <TitleBar />
-                <CardTemplate/>
-            </div>
-        </MuiThemeProvider>
+    <MuiThemeProvider muiTheme={getMuiTheme(MainTheme.default)}>
+        <div>
+            <TitleBar title="EvilToolkit"/>
+            <CardTemplate
+                title="YouTubeDL"
+                description="Allows you to download YouTube videos into several formats (MP4, MP3, etc.)"
+                button="YouTubeDL"
+                href="/#/ytdl"
+            />
+        </div>
+    </MuiThemeProvider>
 );
 
 const YtDl = () => (
@@ -29,10 +34,10 @@ const YtDl = () => (
 );
 
 ReactDOM.render((
-<HashRouter>
-    <div>
-        <Route path="/" component={App}/>
-        <Route path="/ytdl" component={YtDl}/>
-    </div>
-</HashRouter>
+    <HashRouter>
+        <div>
+            <Route path="/" component={App}/>
+            <Route path="/ytdl" component={YtDl}/>
+        </div>
+    </HashRouter>
 ), document.getElementById('root'));

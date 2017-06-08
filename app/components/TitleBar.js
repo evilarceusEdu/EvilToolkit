@@ -1,10 +1,17 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 
-const TitleBar = () => (
-    <AppBar
-        title="EvilToolkit"
-        iconClassNameRight="muidocs-icon-navigation-expand-more"
-    />
-);
-export default TitleBar;
+export default class TitleBar extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <AppBar
+                title={this.props.title}
+            />
+        )
+    }
+}
