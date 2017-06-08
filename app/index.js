@@ -6,6 +6,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 /* Import components */
 import MainTheme from './components/MainTheme';
+import MainTheme_Dark from './components/MainTheme_Dark';
 import TitleBar from './components/TitleBar';
 import CardTemplate from "./components/CardTemplate";
 /*-------------------*/
