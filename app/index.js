@@ -27,7 +27,9 @@ const YtDl = () => (
 
 ReactDOM.render((
 <HashRouter>
-    <Route path="/" component={App}/>
-    <Route path="/ytdl" component={YtDl}/>
+    <div>
+        <Route path="/" component={App}/>
+        <Route path="/ytdl" component={YtDl}/>
+    </div>
 </HashRouter>
 ), document.getElementById('root'));
