@@ -30,7 +30,7 @@ const App = () => (
 );
 
 const YtDl = () => (
-    <MuiThemeProvider muiTheme={getMuiTheme(MainTheme.default)}>
+    <MuiThemeProvider muiTheme={getMuiTheme(MainTheme.ytdl)}>
         <div>
             <TitleBar title="YouTubeDL" />
         </div>
