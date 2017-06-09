@@ -5,7 +5,7 @@ import TitleBar from "../components/TitleBar";
 import * as Config from "../Config";
 import MainDrawer from "../components/MainDrawer";
 import CardTemplate from "../components/CardTemplate";
-import BottomNav from "../components/BottomNav";
+import TabsTemplate from "../components/TabsTemplate";
 
 const contentStyle = {
     /* WORST HACK EVER - DONUT STEEL ( ͡° ͜ʖ ͡°) */
@@ -13,22 +13,30 @@ const contentStyle = {
 };
 
 export default class App extends React.Component {
+
     render() {
-        return(
+        return (
             <MuiThemeProvider muiTheme={getMuiTheme(Config.theme.default)}>
                 <div>
                     <MainDrawer />
                     <div className="content" style={contentStyle}>
                         <TitleBar title="EvilToolkit"/>
-                        <CardTemplate
-                            title="YouTubeDL"
-                            description="Allows you to download YouTube videos into several formats (MP4, MP3, etc.)"
-                            button="YouTubeDL"
-                            href="/#/ytdl"
-                        />
-                        <BottomNav />
+                        <TabsTemplate>
+                            <div className="tool">
+                                <CardTemplate
+                                    title="YouTubeDL"
+                                    description="Allows you to download YouTube videos into several formats (MP4, MP3, etc.)"
+                                    button="YouTubeDL"
+                                    href="/#/ytdl"
+                                />
+                            </div>
+                            <div className="source">
+                                <h1>Not implemented!</h1>
+                            </div>
+                        </TabsTemplate>
                     </div>
                 </div>
             </MuiThemeProvider>
-        )}
-};
+        )
+    };
+}
