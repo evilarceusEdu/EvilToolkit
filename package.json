@@ -22,6 +22,7 @@
     "react-dom": "^15.5.4",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-swipeable-views": "^0.12.3",
     "react-tap-event-plugin": "^2.0.1",
     "style-loader": "^0.18.2",
     "uglifyjs": "^2.4.11",
