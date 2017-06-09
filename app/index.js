@@ -5,11 +5,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 /* Import components */
-import MainTheme from './components/MainTheme';
-import MainTheme_Dark from './components/MainTheme_Dark';
 import TitleBar from './components/TitleBar';
 import CardTemplate from "./components/CardTemplate";
 import MainDrawer from "./components/MainDrawer";
+import * as Config from "./Config";
 /*-------------------*/
 
 // Needed for onTouchTap
@@ -22,7 +21,7 @@ const contentStyle = {
 };
 
 const App = () => (
-    <MuiThemeProvider muiTheme={getMuiTheme(MainTheme.default)}>
+    <MuiThemeProvider muiTheme={getMuiTheme(Config.theme.default)}>
         <div>
             <MainDrawer />
             <div className="content" style={contentStyle}>
@@ -39,7 +38,7 @@ const App = () => (
 );
 
 const YtDl = () => (
-    <MuiThemeProvider muiTheme={getMuiTheme(MainTheme.ytdl)}>
+    <MuiThemeProvider muiTheme={getMuiTheme(Config.theme.ytdl)}>
         <div>
             <MainDrawer />
             <div className="content" style={contentStyle}>
