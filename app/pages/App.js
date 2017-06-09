@@ -5,6 +5,7 @@ import TitleBar from "../components/TitleBar";
 import * as Config from "../Config";
 import MainDrawer from "../components/MainDrawer";
 import CardTemplate from "../components/CardTemplate";
+import BottomNav from "../components/BottomNav";
 
 const contentStyle = {
     /* WORST HACK EVER - DONUT STEEL ( ͡° ͜ʖ ͡°) */
@@ -25,6 +26,7 @@ export default class App extends React.Component {
                             button="YouTubeDL"
                             href="/#/ytdl"
                         />
+                        <BottomNav />
                     </div>
                 </div>
             </MuiThemeProvider>

@@ -4,6 +4,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import TitleBar from "../components/TitleBar";
 import * as Config from "../Config";
 import MainDrawer from "../components/MainDrawer";
+import BottomNav from "../components/BottomNav";
 
 const contentStyle = {
     /* WORST HACK EVER - DONUT STEEL ( ͡° ͜ʖ ͡°) */
@@ -18,6 +19,7 @@ export default class YtDl extends React.Component {
                     <MainDrawer />
                     <div className="content" style={contentStyle}>
                         <TitleBar title="YouTubeDL" />
+                        <BottomNav />
                     </div>
                 </div>
             </MuiThemeProvider>
