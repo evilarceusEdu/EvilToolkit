@@ -18,7 +18,7 @@ export default class YtDl extends React.Component {
                 <div>
                     <MainDrawer />
                     <div className="content" style={contentStyle}>
-                        <TitleBar title="YouTubeDL" />
+                        <TitleBar title="YouTubeDL" icon="back" />
                         <TabsTemplate>
                             <div className="tool">
 
