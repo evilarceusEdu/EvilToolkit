@@ -12,12 +12,6 @@ import App from './pages/App'
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
-const contentStyle = {
-    /* WORST HACKER EVER - DONUT STEEL ( ͡° ͜ʖ ͡°) */
-    marginLeft: '256px'
-};
-
-
 
 ReactDOM.render((
     <HashRouter>
