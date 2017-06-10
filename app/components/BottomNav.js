@@ -4,17 +4,10 @@ import Paper from 'material-ui/Paper';
 import IconActionBuild from 'material-ui/svg-icons/action/build'
 import IconActionCode from 'material-ui/svg-icons/action/code'
 import SwipeableView from 'react-swipeable-views';
+import {bottomNavStyle} from './Styles';
 
 const toolIcon = <IconActionBuild>restore</IconActionBuild>;
 const codeIcon = <IconActionCode />;
-
-const navStyle = {
-    /* Ok, this hack is even worse, but again, DONUT STEEL ( ͡° ͜ʖ ͡°) */
-    position: "fixed",
-    bottom: "0px",
-    right: "10%",
-    left: "10%"
-};
 
 export default class BottomNav extends React.Component {
     constructor(props) {
@@ -30,7 +23,7 @@ export default class BottomNav extends React.Component {
         return (
             <div>
                 <Paper zDepth={1}>
-                    <BottomNavigation selectedIndex={this.state.selectedIndex} style={navStyle}>
+                    <BottomNavigation selectedIndex={this.state.selectedIndex} style={bottomNavStyle}>
                         <BottomNavigationItem
                             label="Tool"
                             icon={toolIcon}
