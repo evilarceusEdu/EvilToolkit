@@ -16,31 +16,42 @@ const navStyle = {
     left: "10%"
 };
 
-class BottomNav extends React.Component {
-    state = {
-        selectedIndex: 0,
+export default class BottomNav extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedIndex: 0,
+        };
     };
 
     select = (index) => this.setState({selectedIndex: index});
 
     render() {
         return (
-            <Paper zDepth={1}>
-                <BottomNavigation selectedIndex={this.state.selectedIndex} style={navStyle}>
-                    <BottomNavigationItem
-                        label="Tool"
-                        icon={toolIcon}
-                        onTouchTap={() => this.select(0)}
-                    />
-                    <BottomNavigationItem
-                        label="Source"
-                        icon={codeIcon}
-                        onTouchTap={() => this.select(1)}
-                    />
-                </BottomNavigation>
-            </Paper>
+            <div>
+                <Paper zDepth={1}>
+                    <BottomNavigation selectedIndex={this.state.selectedIndex} style={navStyle}>
+                        <BottomNavigationItem
+                            label="Tool"
+                            icon={toolIcon}
+                            onTouchTap={() => this.select(0)}
+                        />
+                        <BottomNavigationItem
+                            label="Source"
+                            icon={codeIcon}
+                            onTouchTap={() => this.select(1)}
+                        />
+                    </BottomNavigation>
+                </Paper>
+                <SwipeableView
+                    index={this.state.selectedIndex}
+                    onChangeIndex={this.select}
+                >
+                    {React.Children.map(this.props.children, (element, idx) => {
+                        return React.cloneElement(element, { ref: idx });
+                    })}
+                </SwipeableView>
+            </div>
         );
     }
 }
-
-export default BottomNav;

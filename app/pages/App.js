@@ -5,7 +5,7 @@ import TitleBar from "../components/TitleBar";
 import * as Config from "../Config";
 import MainDrawer from "../components/MainDrawer";
 import CardTemplate from "../components/CardTemplate";
-import TabsTemplate from "../components/TabsTemplate";
+import BottomNav from "../components/BottomNav";
 
 const contentStyle = {
     /* WORST HACK EVER - DONUT STEEL ( ͡° ͜ʖ ͡°) */
@@ -21,7 +21,7 @@ export default class App extends React.Component {
                     <MainDrawer />
                     <div className="content" style={contentStyle}>
                         <TitleBar title="EvilToolkit"/>
-                        <TabsTemplate>
+                        <BottomNav>
                             <div className="tool">
                                 <CardTemplate
                                     title="YouTubeDL"
@@ -33,7 +33,7 @@ export default class App extends React.Component {
                             <div className="source">
                                 <h1>Not implemented!</h1>
                             </div>
-                        </TabsTemplate>
+                        </BottomNav>
                     </div>
                 </div>
             </MuiThemeProvider>
