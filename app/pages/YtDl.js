@@ -74,10 +74,10 @@ export default class YtDl extends React.Component {
                         <TitleBar title="YouTubeDL" icon="back" />
                         <BottomNav>
                             <div className="tool">
-                                <div className="video" style={{textAlign: "center", margin: "auto"}}>
+                                <div className="video" style={{textAlign: "center", margin: "auto", width: "560px", height: "315px"}}>
                                     { this.state.showEmbed ? <Embed videoId={this.state.youtubeVideoId} /> : null}
                                 </div>
-                                <div className="centerAlign" style={{textAlign: "center", margin: "auto",}}>
+                                <div className="centerAlign" style={{textAlign: "center"}}>
                                     <TextField
                                         hintText="YouTube URL"
                                         style={{width: "50%"}}
@@ -95,7 +95,6 @@ export default class YtDl extends React.Component {
                                 >
                                     Please enter a valid YouTube URL (ex. https://www.youtube.com/watch?v=[videoID])
                                 </Dialog>
-
                             </div>
                             <div className="source">
                                 <h1>Not implemented!</h1>
