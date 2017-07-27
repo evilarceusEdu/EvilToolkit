@@ -2,7 +2,8 @@ import React from "react";
 import {Dialog, FlatButton, MuiThemeProvider, RaisedButton, TextField} from "material-ui";
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import * as Config from "../Config";
-import {BottomNav, MainDrawer, Styles, TitleBar} from '../components'
+import {BottomNav, MainDrawer, Styles, TitleBar} from '../components';
+
 
 class Embed extends React.Component {
     constructor(props)
@@ -28,19 +29,6 @@ export default class YtDl extends React.Component {
         };
     }
 
-    getEmbededVideo = () => {
-        if (this.state.inputValue.includes("v=")) {
-            this.setState({youtubeVideoId: this.state.inputValue.substring(this.state.inputValue.indexOf("v=")).replace("v=", "")});
-            if (this.state.inputValue.includes("&")) {
-                this.setState({
-                    youtubeVideoId: this.state.inputValue.substring(this.state.inputValue.indexOf("v="), this.state.inputValue.indexOf("&")).replace("v=", "")
-                })
-            }
-            this.showEmbededVideo();
-        } else this.handleDialogOpen();
-
-    };
-
     showEmbededVideo = () => {
         this.setState({showEmbed: true});
     };
@@ -55,6 +43,38 @@ export default class YtDl extends React.Component {
 
     handleDialogClose = () => {
         this.setState({open: false});
+    };
+
+    getVideo = () => {
+        var videoId;
+        if (this.state.inputValue.includes("v=")) {
+            videoId = this.state.inputValue.substring(this.state.inputValue.indexOf("v=")).replace("v=", "");
+            if (this.state.inputValue.includes("&")) {
+                videoId = this.state.inputValue.substring(this.state.inputValue.indexOf("v="), this.state.inputValue.indexOf("&")).replace("v=", "");
+            }
+            this.setState({youtubeVideoId: videoId});
+            this.showEmbededVideo();
+
+        } else this.handleDialogOpen();
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/scripts/ytdl", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("videoId", videoId);
+        xhr.responseType = "blob";
+        xhr.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                var filename = xhr.getResponseHeader('Content-Disposition').replace("attachment; filename=", "");
+                var downloadUrl = URL.createObjectURL(xhr.response);
+                var a = document.createElement("a");
+                document.body.appendChild(a);
+                a.style = "display: none";
+                a.href = downloadUrl;
+                a.download = filename;
+                a.click();
+            }
+        };
+        xhr.send();
     };
 
     render() {
@@ -84,7 +104,7 @@ export default class YtDl extends React.Component {
                                         value={this.state.inputValue}
                                         onChange={this.updateInputValue}
                                     />
-                                    <RaisedButton label="Submit" primary={true} onClick={this.getEmbededVideo}/>
+                                    <RaisedButton label="Submit" primary={true} onClick={this.getVideo}/>
                                 </div>
                                 <Dialog
                                     title="YouTubeDL"
