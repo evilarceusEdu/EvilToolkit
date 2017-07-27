@@ -47,11 +47,21 @@ export default class YtDl extends React.Component {
 
     getVideo = () => {
         var videoId;
-        if (this.state.inputValue.includes("v=")) {
-            videoId = this.state.inputValue.substring(this.state.inputValue.indexOf("v=")).replace("v=", "");
-            if (this.state.inputValue.includes("&")) {
-                videoId = this.state.inputValue.substring(this.state.inputValue.indexOf("v="), this.state.inputValue.indexOf("&")).replace("v=", "");
+        var inputValue = this.state.inputValue;
+        // Remove www from link
+        if (inputValue.includes("www.")) {
+            inputValue = inputValue.replace("www.", "")
+        }
+        var ytLink = "https://youtube.com/watch?v=";
+
+        if (inputValue.includes(ytLink)) {
+            videoId = inputValue.replace(ytLink, "");
+
+            // Remove any extra parameters from the videoId
+            if (videoId.includes("&")) {
+                videoId.substring(0, videoId.indexOf("&"))
             }
+            // Show embedded video to user
             this.setState({youtubeVideoId: videoId});
             this.showEmbededVideo();
 
