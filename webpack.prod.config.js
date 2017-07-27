@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: [
@@ -17,7 +16,6 @@ module.exports = {
             [
                 {
                     test: /.js?$/,
-
                     loader: 'babel-loader',
                     include: path.join(__dirname, 'app'),
                     exclude: /node_modules/,
@@ -38,6 +36,10 @@ module.exports = {
             title: "EvilToolkit - Webpack",
             filename: "index.html"
         }),
-        new ExtractTextPlugin('style.css')
+        new webpack.DefinePlugin({
+            "process.env": {
+                NODE_ENV: JSON.stringify("production")
+            }
+        })
     ]
 };
