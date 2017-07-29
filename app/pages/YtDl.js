@@ -1,5 +1,5 @@
 import React from "react";
-import {Dialog, FlatButton, MuiThemeProvider, RaisedButton, TextField} from "material-ui";
+import {Dialog, FlatButton, DropDownMenu, MenuItem, MuiThemeProvider, RaisedButton, TextField} from "material-ui";
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import * as Config from "../Config";
 import {BottomNav, MainDrawer, Styles, TitleBar} from '../components';
@@ -25,7 +25,8 @@ export default class YtDl extends React.Component {
             showEmbed: false,
             inputValue: "",
             youtubeVideoId: "",
-            dialogOpen: false
+            dialogOpen: false,
+            dropDown: 0,
         };
     }
 
@@ -43,6 +44,10 @@ export default class YtDl extends React.Component {
 
     handleDialogClose = () => {
         this.setState({open: false});
+    };
+
+    handleDropDown = (event, index, value) => {
+        this.setState({dropDown: index});
     };
 
     getVideo = () => {
@@ -71,6 +76,12 @@ export default class YtDl extends React.Component {
         xhr.open("GET", "/scripts/ytdl", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.setRequestHeader("videoId", videoId);
+        if (this.state.dropDown === 0) {
+            xhr.setRequestHeader("filetype", ".mp3");
+        }
+        if (this.state.dropDown === 1) {
+            xhr.setRequestHeader("filetype", ".mp4");
+        }
         xhr.responseType = "blob";
         xhr.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
@@ -115,6 +126,12 @@ export default class YtDl extends React.Component {
                                         onChange={this.updateInputValue}
                                     />
                                     <RaisedButton label="Submit" primary={true} onClick={this.getVideo}/>
+                                </div>
+                                <div className="centerAlign" style={{textAlign: "center"}}>
+                                    <DropDownMenu value={this.state.dropDown} onChange={this.handleDropDown}>
+                                        <MenuItem value={0} primaryText="mp3" />
+                                        <MenuItem value={1} primaryText="mp4" />
+                                    </DropDownMenu>
                                 </div>
                                 <Dialog
                                     title="YouTubeDL"

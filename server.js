@@ -54,27 +54,36 @@ app.get('/getSource', function(req, res) {
 
 app.get('/scripts/ytdl', function(req, res) {
     var videoInfo = undefined;
-    res.set("Content-Type", "application/octet-stream");
-    res.set("Content-Disposition", "attachment; filename=" + req.headers.videoid + ".mp4");
+    var videoId = req.headers.videoid;
+    var extension = req.headers.filetype;
 
-    ytdl.getInfo("https://youtube.com/watch?v=" + req.headers.videoid, function(err, info) {
+    res.set("Content-Type", "application/octet-stream");
+    res.set("Content-Disposition", "attachment; filename=" + videoId + extension);
+
+    ytdl.getInfo("https://youtube.com/watch?v=" + videoId, function(err, info) {
         if (err) throw err;
         videoInfo = info;
         console.log("[YTDL] Downloading video: " + videoInfo.title);
+        var args;
+        if (extension === ".mp4") {
+            args = ["-f", "bestvideo[ext=mp4]+bestaudio[ext=m4a]", "-o", downloadDir + "%(title)s-%(id)s.%(ext)s"];
+        }
+        if (extension === ".mp3") {
+            args = ["-f", "bestaudio", "-o", downloadDir + "%(title)s-%(id)s.%(ext)s", "--extract-audio", "--audio-format=mp3"];
+        }
 
-        ytdl.exec("https://youtube.com/watch?v=" + req.headers.videoid,
-            ["-f", "bestvideo[ext=mp4]+bestaudio[ext=m4a]", "-o", downloadDir + "%(title)s-%(id)s.%(ext)s"], function(err, info) {
+        ytdl.exec("https://youtube.com/watch?v=" + videoId, args, function (err, info) {
                 if (err) throw err;
 
                 while (false) {
-                    fs.existsSync(path.join(downloadDir, videoInfo.fulltitle + "-" + req.headers.videoid + ".mp4"));
+                    fs.existsSync(path.join(downloadDir, videoInfo.title + "-" + videoId + extension));
                 }
 
-                fs.createReadStream(path.join(downloadDir, videoInfo.fulltitle + "-" + req.headers.videoid + ".mp4")).pipe(res);
+                fs.createReadStream(path.join(downloadDir, videoInfo.title + "-" + videoId + extension)).pipe(res);
                 console.log("[YTDL] Video uploaded: " + videoInfo.title);
 
                 // Delete video after to save space
-                fs.unlinkSync(path.join(downloadDir, videoInfo.fulltitle + "-" + req.headers.videoid + ".mp4"));
+                fs.unlinkSync(path.join(downloadDir, videoInfo.title + "-" + videoId + extension));
             });
     });
 });
