@@ -1,14 +1,24 @@
+var cfg = require('./app/Config');
 var express = require('express');
 var bodyParser = require('body-parser');
-var app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
 var path = require('path');
 var fs = require('fs');
 var ytdl = require('youtube-dl');
-var downloadDir = __dirname + "/ytdl/";
+var app = express();
+var downloadDir = path.join(__dirname, cfg.ytdl.downloadDir);
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
 
 // Check stuff before starting
 function preInit() {
+    // Make sure downloadDir ends with a trailing slash
+    if (!downloadDir.endsWith("/")) {
+        downloadDir += "/";
+        console.warn("The download directory for YouTubeDL does not contain a trailing slash. Please add it to remove this message.");
+    }
+
+    // Create download directory for YTDL
     fs.stat(downloadDir, function (err, stats) {
         if (err === null) {
             // Directory exists - Do nothing
@@ -71,4 +81,4 @@ app.get('/scripts/ytdl', function(req, res) {
 
 preInit();
 console.log("App listening on http://localhost:8080/");
-app.listen(8080);
+app.listen(cfg.port);
