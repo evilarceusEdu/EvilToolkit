@@ -29,7 +29,7 @@ export default class YtDl extends React.Component {
         };
     }
 
-    showEmbededVideo = () => {
+    showEmbeddedVideo = () => {
         this.setState({showEmbed: true});
     };
 
@@ -63,7 +63,7 @@ export default class YtDl extends React.Component {
             }
             // Show embedded video to user
             this.setState({youtubeVideoId: videoId});
-            this.showEmbededVideo();
+            this.showEmbeddedVideo();
 
         } else this.handleDialogOpen();
 
